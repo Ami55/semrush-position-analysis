@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/semrush/*.js": {
+      "maxDuration": 30
+    }
+  }
+}

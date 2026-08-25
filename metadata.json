@@ -1,0 +1,6 @@
+{
+  "name": "SemanticMapper",
+  "description": "SemanticMapper — Executive SEMrush Position Tracking and keyword intelligence suite for tracking ranking movements, competitor visibility gaps, and search performance. Developed by Ami - SEO Girl.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
