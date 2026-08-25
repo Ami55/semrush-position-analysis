@@ -165,15 +165,15 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
           {/* KPI 1: Visibility */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400">
+          <div className="grid min-h-[170px] grid-rows-[2.75rem_3rem_2.5rem_auto] rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-2 text-slate-400">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Visibility</span>
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
+            <div className="flex items-center gap-1">
               <span className="text-2xl font-extrabold text-[#002B49] font-mono">{tblMetrics.currentVisibility}%</span>
             </div>
-            <div className="mt-2 flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-1 whitespace-nowrap text-xs">
               {tblMetrics.visibilityAbsChange >= 0 ? (
                 <span className="flex items-center font-bold text-emerald-600">
                   <ArrowUpRight className="h-3.5 w-3.5" />
@@ -187,21 +187,21 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               )}
               <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.visibilityPctChange >= 0 ? '+' : ''}{tblMetrics.visibilityPctChange}%)</span>
             </div>
-            <div className="mt-2 border-t border-slate-100 pt-2 text-[10px] text-slate-500">
+            <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
               Prior: <strong className="text-slate-700">{tblMetrics.comparisonVisibility}%</strong>
             </div>
           </div>
 
           {/* KPI 2: Average Position (Lower is better!) */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400">
+          <div className="grid min-h-[170px] grid-rows-[2.75rem_3rem_2.5rem_auto] rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-2 text-slate-400">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Avg Position</span>
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
+            <div className="flex items-center gap-1">
               <span className="text-2xl font-extrabold text-[#002B49] font-mono">{tblMetrics.currentAveragePosition}</span>
             </div>
-            <div className="mt-2 flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-1 whitespace-nowrap text-xs">
               {tblMetrics.positionImprovement >= 0 ? (
                 <span className="flex items-center font-bold text-emerald-600" title="Position improved (lower number is better)">
                   <ArrowUpRight className="h-3.5 w-3.5" />
@@ -215,21 +215,21 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               )}
               <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.positionImprovementPct >= 0 ? '+' : ''}{tblMetrics.positionImprovementPct}%)</span>
             </div>
-            <div className="mt-2 border-t border-slate-100 pt-2 text-[10px] text-slate-500">
+            <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
               Prior: <strong className="text-slate-700">{tblMetrics.comparisonAveragePosition}</strong>
             </div>
           </div>
 
           {/* KPI 3: Estimated Traffic */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400">
+          <div className="grid min-h-[170px] grid-rows-[2.75rem_3rem_2.5rem_auto] rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-2 text-slate-400">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Est. Traffic</span>
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
+            <div className="flex items-center gap-1">
               <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(tblMetrics.currentEstimatedTraffic ?? 0).toLocaleString()}</span>
             </div>
-            <div className="mt-2 flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-1 whitespace-nowrap text-xs">
               {(tblMetrics.trafficAbsChange ?? 0) >= 0 ? (
                 <span className="flex items-center font-bold text-emerald-600">
                   <ArrowUpRight className="h-3.5 w-3.5" />
@@ -243,87 +243,87 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               )}
               <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.trafficPctChange >= 0 ? '+' : ''}{tblMetrics.trafficPctChange}%)</span>
             </div>
-            <div className="mt-2 border-t border-slate-100 pt-2 text-[10px] text-slate-500">
+            <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
               Prior: <strong className="text-slate-700">{(tblMetrics.comparisonEstimatedTraffic ?? 0).toLocaleString()}</strong>
             </div>
           </div>
 
           {/* KPI 4: Top 3 */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400">
+          <div className="grid min-h-[170px] grid-rows-[2.75rem_3rem_2.5rem_auto] rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-2 text-slate-400">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Top 3 KWs</span>
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
+            <div className="flex items-center gap-1">
               <span className="text-2xl font-extrabold text-[#008768] font-mono">{(tblMetrics.currentTop3 ?? 0).toLocaleString()}</span>
             </div>
-            <div className="mt-2 flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-1 whitespace-nowrap text-xs">
               <span className={`flex items-center font-bold ${tblMetrics.top3AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                 {tblMetrics.top3AbsChange >= 0 ? '+' : ''}{tblMetrics.top3AbsChange} KWs
               </span>
               <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.top3PctChange >= 0 ? '+' : ''}{tblMetrics.top3PctChange}%)</span>
             </div>
-            <div className="mt-2 border-t border-slate-100 pt-2 text-[10px] text-slate-500">
+            <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
               Prior: <strong className="text-slate-700">{(tblMetrics.comparisonTop3 ?? 0).toLocaleString()}</strong>
             </div>
           </div>
 
           {/* KPI 5: Top 10 */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400">
+          <div className="grid min-h-[170px] grid-rows-[2.75rem_3rem_2.5rem_auto] rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-2 text-slate-400">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Top 10 KWs</span>
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
+            <div className="flex items-center gap-1">
               <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(tblMetrics.currentTop10 ?? 0).toLocaleString()}</span>
             </div>
-            <div className="mt-2 flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-1 whitespace-nowrap text-xs">
               <span className={`flex items-center font-bold ${tblMetrics.top10AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                 {tblMetrics.top10AbsChange >= 0 ? '+' : ''}{tblMetrics.top10AbsChange} KWs
               </span>
               <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.top10PctChange >= 0 ? '+' : ''}{tblMetrics.top10PctChange}%)</span>
             </div>
-            <div className="mt-2 border-t border-slate-100 pt-2 text-[10px] text-slate-500">
+            <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
               Prior: <strong className="text-slate-700">{(tblMetrics.comparisonTop10 ?? 0).toLocaleString()}</strong>
             </div>
           </div>
 
           {/* KPI 6: Top 20 */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400">
+          <div className="grid min-h-[170px] grid-rows-[2.75rem_3rem_2.5rem_auto] rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-2 text-slate-400">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Top 20 KWs</span>
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
+            <div className="flex items-center gap-1">
               <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(tblMetrics.currentTop20 ?? 0).toLocaleString()}</span>
             </div>
-            <div className="mt-2 flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-1 whitespace-nowrap text-xs">
               <span className={`flex items-center font-bold ${tblMetrics.top20AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                 {tblMetrics.top20AbsChange >= 0 ? '+' : ''}{tblMetrics.top20AbsChange} KWs
               </span>
               <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.top20PctChange >= 0 ? '+' : ''}{tblMetrics.top20PctChange}%)</span>
             </div>
-            <div className="mt-2 border-t border-slate-100 pt-2 text-[10px] text-slate-500">
+            <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
               Prior: <strong className="text-slate-700">{(tblMetrics.comparisonTop20 ?? 0).toLocaleString()}</strong>
             </div>
           </div>
 
           {/* KPI 7: Top 100 */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400">
+          <div className="grid min-h-[170px] grid-rows-[2.75rem_3rem_2.5rem_auto] rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-2 text-slate-400">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Top 100 KWs</span>
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
+            <div className="flex items-center gap-1">
               <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(tblMetrics.currentTop100 ?? 0).toLocaleString()}</span>
             </div>
-            <div className="mt-2 flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-1 whitespace-nowrap text-xs">
               <span className={`flex items-center font-bold ${tblMetrics.top100AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                 {tblMetrics.top100AbsChange >= 0 ? '+' : ''}{tblMetrics.top100AbsChange} KWs
               </span>
               <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.top100PctChange >= 0 ? '+' : ''}{tblMetrics.top100PctChange}%)</span>
             </div>
-            <div className="mt-2 border-t border-slate-100 pt-2 text-[10px] text-slate-500">
+            <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
               Prior: <strong className="text-slate-700">{(tblMetrics.comparisonTop100 ?? 0).toLocaleString()}</strong>
             </div>
           </div>
