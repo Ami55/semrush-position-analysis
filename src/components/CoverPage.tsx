@@ -30,8 +30,8 @@ export const CoverPage: React.FC<CoverPageProps> = ({
   onNavigate,
 }) => {
   const defaultCampaign: CampaignConfig = {
-    campaignName: 'toursbylocals.com – mobile',
-    primaryDomain: 'toursbylocals.com',
+    campaignName: 'example.com – mobile',
+    primaryDomain: 'example.com',
     approvedCompetitors: ['tripadvisor.com', 'viator.com', 'getyourguide.com'],
     searchEngine: 'Google',
     market: 'United States',
