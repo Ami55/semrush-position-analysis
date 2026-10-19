@@ -33,7 +33,7 @@ interface KeywordGapsReportProps {
   onViewValidationModal: () => void;
 }
 
-type GapView = 'competitor_top10' | 'striking_distance' | 'tbl_advantage' | 'uncontested' | 'all';
+type GapView = 'competitor_top10' | 'striking_distance' | 'primary_advantage' | 'uncontested' | 'all';
 
 export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
   keywords,
@@ -68,38 +68,38 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
   const classifiedKeywords = useMemo(() => {
     return keywords.map((k) => {
       const bestComp = getBestCompetitorPos(k);
-      const tblPos = k.tblPosition;
+      const primaryPos = k.primaryPosition;
 
-      // Position gap = TBL Pos - Best Competitor Pos.
-      // Positive = TBL ranks worse. Negative = TBL ranks better.
+      // Position gap = PRIMARY Pos - Best Competitor Pos.
+      // Positive = PRIMARY ranks worse. Negative = PRIMARY ranks better.
       let positionGap: number | null = null;
-      if (tblPos !== null && bestComp !== null) {
-        positionGap = tblPos - bestComp;
-      } else if (tblPos === null && bestComp !== null) {
+      if (primaryPos !== null && bestComp !== null) {
+        positionGap = primaryPos - bestComp;
+      } else if (primaryPos === null && bestComp !== null) {
         positionGap = 101 - bestComp; // Unranked fallback representation
-      } else if (tblPos !== null && bestComp === null) {
-        positionGap = tblPos - 101;
+      } else if (primaryPos !== null && bestComp === null) {
+        positionGap = primaryPos - 101;
       }
 
       // Check view memberships
-      const isCompTop10TBLOutside = (bestComp !== null && bestComp <= 10) && (tblPos === null || tblPos > 10);
-      const isStrikingDistance = tblPos !== null && tblPos >= 11 && tblPos <= 20;
-      const isTBLAdvantage = tblPos !== null && (bestComp === null || tblPos < bestComp);
-      const isUncontested = (tblPos === null || tblPos > 10) && (bestComp === null || bestComp > 10);
+      const isCompTop10PRIMARYOutside = (bestComp !== null && bestComp <= 10) && (primaryPos === null || primaryPos > 10);
+      const isStrikingDistance = primaryPos !== null && primaryPos >= 11 && primaryPos <= 20;
+      const isPRIMARYAdvantage = primaryPos !== null && (bestComp === null || primaryPos < bestComp);
+      const isUncontested = (primaryPos === null || primaryPos > 10) && (bestComp === null || bestComp > 10);
 
       let opportunityType = 'Standard';
-      if (isTBLAdvantage) opportunityType = 'TBL Advantage';
+      if (isPRIMARYAdvantage) opportunityType = 'PRIMARY Advantage';
       else if (isStrikingDistance) opportunityType = 'Striking Distance (Page 2)';
-      else if (isCompTop10TBLOutside) opportunityType = 'Competitor Threat (Top 10)';
+      else if (isCompTop10PRIMARYOutside) opportunityType = 'Competitor Threat (Top 10)';
       else if (isUncontested) opportunityType = 'Uncontested Opportunity';
 
       return {
         ...k,
         bestCompetitorPos: bestComp,
         positionGap,
-        isCompTop10TBLOutside,
+        isCompTop10PRIMARYOutside,
         isStrikingDistance,
-        isTBLAdvantage,
+        isPRIMARYAdvantage,
         isUncontested,
         opportunityType,
       };
@@ -109,9 +109,9 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
   // Filtered keywords
   const filteredRecords = useMemo(() => {
     return classifiedKeywords.filter((k) => {
-      if (activeView === 'competitor_top10' && !k.isCompTop10TBLOutside) return false;
+      if (activeView === 'competitor_top10' && !k.isCompTop10PRIMARYOutside) return false;
       if (activeView === 'striking_distance' && !k.isStrikingDistance) return false;
-      if (activeView === 'tbl_advantage' && !k.isTBLAdvantage) return false;
+      if (activeView === 'primary_advantage' && !k.isPRIMARYAdvantage) return false;
       if (activeView === 'uncontested' && !k.isUncontested) return false;
 
       if (searchQuery && !k.keyword.toLowerCase().includes(searchQuery.toLowerCase()) && !k.rankingUrl.toLowerCase().includes(searchQuery.toLowerCase())) {
@@ -125,9 +125,9 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
     });
   }, [classifiedKeywords, activeView, searchQuery, selectedIntent, selectedTag, minVolume]);
 
-  const countCompTop10 = classifiedKeywords.filter((k) => k.isCompTop10TBLOutside).length;
+  const countCompTop10 = classifiedKeywords.filter((k) => k.isCompTop10PRIMARYOutside).length;
   const countStriking = classifiedKeywords.filter((k) => k.isStrikingDistance).length;
-  const countAdvantage = classifiedKeywords.filter((k) => k.isTBLAdvantage).length;
+  const countAdvantage = classifiedKeywords.filter((k) => k.isPRIMARYAdvantage).length;
   const countUncontested = classifiedKeywords.filter((k) => k.isUncontested).length;
 
   const gapTakeaways: TakeawayItem[] = [
@@ -140,7 +140,7 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
       comparisonType: 'competitive',
     },
     {
-      whatHappened: `Found ${countCompTop10} high-intent queries where competitors dominate Top 10 while ToursByLocals ranks on page 2 or deeper.`,
+      whatHappened: `Found ${countCompTop10} high-intent queries where competitors dominate Top 10 while Example Travel ranks on page 2 or deeper.`,
       whyItMatters: 'Competitor dominance in shore excursions and day trips siphons high-converting mobile search traffic.',
       opportunityOrRisk: 'risk',
       recommendedAction: 'Enhance port transfer details and private custom itinerary highlights to outrank generic aggregator listings.',
@@ -158,11 +158,11 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
             Archived Spreadsheet Report
           </span>
           <h1 className="text-2xl font-bold tracking-tight text-[#002B49] sm:text-3xl">
-            Report 11: TBL vs Competitor Keyword Gaps
+            Report 11: PRIMARY vs Competitor Keyword Gaps
           </h1>
         </div>
         <p className="mt-2 text-xs text-slate-600 max-w-3xl leading-relaxed">
-          Compares ToursByLocals ranking positions against key competitors on a keyword-by-keyword basis to uncover immediate opportunities, competitive advantages and content gaps.
+          Compares Example Travel ranking positions against key competitors on a keyword-by-keyword basis to uncover immediate opportunities, competitive advantages and content gaps.
         </p>
       </div>
 
@@ -181,9 +181,9 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
           <div className="flex flex-wrap items-center gap-2">
             {[
-              { id: 'competitor_top10', label: 'Competitor Top 10, TBL Outside', count: countCompTop10, icon: Target, color: 'text-amber-800 bg-amber-100' },
-              { id: 'striking_distance', label: 'TBL Striking Distance (Pos 11–20)', count: countStriking, icon: Zap, color: 'text-sky-800 bg-sky-100' },
-              { id: 'tbl_advantage', label: 'TBL Competitive Advantage', count: countAdvantage, icon: Award, color: 'text-emerald-800 bg-emerald-100' },
+              { id: 'competitor_top10', label: 'Competitor Top 10, PRIMARY Outside', count: countCompTop10, icon: Target, color: 'text-amber-800 bg-amber-100' },
+              { id: 'striking_distance', label: 'PRIMARY Striking Distance (Pos 11–20)', count: countStriking, icon: Zap, color: 'text-sky-800 bg-sky-100' },
+              { id: 'primary_advantage', label: 'PRIMARY Competitive Advantage', count: countAdvantage, icon: Award, color: 'text-emerald-800 bg-emerald-100' },
               { id: 'uncontested', label: 'Uncontested Opportunities', count: countUncontested, icon: Sparkles, color: 'text-purple-800 bg-purple-100' },
               { id: 'all', label: 'All Tracked Gaps', count: keywords.length, icon: Layers, color: 'text-slate-700 bg-slate-100' },
             ].map((v) => {
@@ -277,7 +277,7 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
                 <th className="py-3 px-4">Keyword</th>
                 <th className="py-3 px-3 text-right">Volume</th>
                 <th className="py-3 px-3">Intent</th>
-                <th className="py-3 px-3 text-right">TBL Pos</th>
+                <th className="py-3 px-3 text-right">PRIMARY Pos</th>
                 <th className="py-3 px-3 text-right">TripAdvisor</th>
                 <th className="py-3 px-3 text-right">Viator</th>
                 <th className="py-3 px-3 text-right">GetYourGuide</th>
@@ -295,7 +295,7 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
                 </tr>
               ) : (
                 filteredRecords.map((r) => {
-                  const hasTBLAdvantage = r.isTBLAdvantage;
+                  const hasPRIMARYAdvantage = r.isPRIMARYAdvantage;
                   const isBehind = r.positionGap !== null && r.positionGap > 0;
 
                   return (
@@ -315,17 +315,17 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
                       </td>
 
                       <td className="py-3 px-3 text-right font-bold">
-                        {r.tblPosition !== null ? (
+                        {r.primaryPosition !== null ? (
                           <span
                             className={`inline-block rounded px-2 py-0.5 ${
-                              r.tblPosition <= 3
+                              r.primaryPosition <= 3
                                 ? 'bg-emerald-100 text-emerald-800'
-                                : r.tblPosition <= 10
+                                : r.primaryPosition <= 10
                                 ? 'bg-emerald-50 text-emerald-700'
                                 : 'text-slate-800'
                             }`}
                           >
-                            Pos {r.tblPosition}
+                            Pos {r.primaryPosition}
                           </span>
                         ) : (
                           <span className="text-slate-400">&gt; 100</span>
@@ -349,9 +349,9 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
                       </td>
 
                       <td className="py-3 px-3 text-right font-bold">
-                        {hasTBLAdvantage ? (
+                        {hasPRIMARYAdvantage ? (
                           <span className="inline-block rounded bg-emerald-100 px-2 py-0.5 text-[11px] text-emerald-800">
-                            {r.positionGap !== null ? `${r.positionGap} pos` : 'TBL Ahead'}
+                            {r.positionGap !== null ? `${r.positionGap} pos` : 'PRIMARY Ahead'}
                           </span>
                         ) : isBehind ? (
                           <span className="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] text-rose-800">
@@ -384,7 +384,7 @@ export const KeywordGapsReport: React.FC<KeywordGapsReportProps> = ({
 
       {/* Key Takeaways */}
       <KeyTakeaways
-        reportTitle="TBL vs Competitor Keyword Gaps"
+        reportTitle="PRIMARY vs Competitor Keyword Gaps"
         items={gapTakeaways}
         defaultRefreshedAt={metadata.lastUploadedAt}
       />
