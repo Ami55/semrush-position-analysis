@@ -86,10 +86,10 @@ export const MethodologyReport: React.FC<MethodologyReportProps> = ({ onNavigate
               </span>
             </div>
             <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-              The rank disparity between ToursByLocals and a target competitor. Positive gaps indicate TBL ranks behind the competitor; negative gaps indicate TBL holds the ranking advantage.
+              The rank disparity between Example Travel and a target competitor. Positive gaps indicate PRIMARY ranks behind the competitor; negative gaps indicate PRIMARY holds the ranking advantage.
             </p>
             <div className="mt-3 rounded bg-white p-2.5 font-mono text-[11px] text-slate-700 border border-slate-200">
-              Position Gap = TBL Avg Pos − Competitor Avg Pos
+              Position Gap = PRIMARY Avg Pos − Competitor Avg Pos
             </div>
           </div>
 
@@ -203,7 +203,7 @@ export const MethodologyReport: React.FC<MethodologyReportProps> = ({ onNavigate
             </p>
             <ul className="list-disc list-inside space-y-1 text-amber-900 font-mono text-[11px]">
               <li>Report 10: Keyword Winners &amp; Losers</li>
-              <li>Report 11: TBL vs Competitor Keyword Gaps</li>
+              <li>Report 11: PRIMARY vs Competitor Keyword Gaps</li>
               <li>Report 12: Top Ranking Landing Pages</li>
               <li>Report 13: Keyword Performance by Tag</li>
               <li>Visible Snapshot Metadata Header on every view</li>
