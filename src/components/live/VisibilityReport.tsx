@@ -41,14 +41,14 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
   filter,
 }) => {
   const [activeDomains, setActiveDomains] = useState<DomainName[]>([
-    'toursbylocals.com',
+    'example.com',
     'tripadvisor.com',
     'viator.com',
     'getyourguide.com',
   ]);
 
   const domainColors: Record<DomainName, { color: string; label: string; strokeWidth: number }> = {
-    'toursbylocals.com': { color: '#008768', label: 'ToursByLocals (Primary)', strokeWidth: 3.5 },
+    'example.com': { color: '#008768', label: 'Example Travel (Primary)', strokeWidth: 3.5 },
     'tripadvisor.com': { color: '#00aa6c', label: 'Tripadvisor', strokeWidth: 2 },
     'viator.com': { color: '#e84c3d', label: 'Viator', strokeWidth: 2 },
     'getyourguide.com': { color: '#ff7700', label: 'GetYourGuide', strokeWidth: 2 },
@@ -82,7 +82,7 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
 
   // Compute domain scorecards
   const domains: DomainName[] = [
-    'toursbylocals.com',
+    'example.com',
     'tripadvisor.com',
     'viator.com',
     'getyourguide.com',
@@ -99,24 +99,24 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
     )
   );
 
-  const tblScorecard = domainScorecards.find((d) => d.domain === 'toursbylocals.com')!;
+  const primaryScorecard = domainScorecards.find((d) => d.domain === 'example.com')!;
 
   // Key takeaways for visibility report
   const visibilityTakeaways: TakeawayItem[] = [
     {
-      whatHappened: `ToursByLocals achieved an average Visibility of ${tblScorecard.currentVisibility}%, an absolute gain of ${tblScorecard.visibilityAbsChange >= 0 ? '+' : ''}${tblScorecard.visibilityAbsChange}% vs comparison period.`,
+      whatHappened: `Example Travel achieved an average Visibility of ${primaryScorecard.currentVisibility}%, an absolute gain of ${primaryScorecard.visibilityAbsChange >= 0 ? '+' : ''}${primaryScorecard.visibilityAbsChange}% vs comparison period.`,
       whyItMatters: 'Higher Visibility reflects a larger proportion of tracked keywords climbing into the click-driving Top 3 and Top 10 positions.',
       opportunityOrRisk: 'opportunity',
       recommendedAction: 'Protect momentum by auditing high-performing landing pages and expanding city-guide schema coverage.',
-      supportingMetric: `TBL: ${tblScorecard.currentVisibility}% (Prior: ${tblScorecard.comparisonVisibility}%)`,
+      supportingMetric: `PRIMARY: ${primaryScorecard.currentVisibility}% (Prior: ${primaryScorecard.comparisonVisibility}%)`,
       comparisonType: filter.comparisonPreset,
     },
     {
       whatHappened: `TripAdvisor leads total market visibility at ${domainScorecards.find(d => d.domain === 'tripadvisor.com')?.currentVisibility}%, while Viator stands at ${domainScorecards.find(d => d.domain === 'viator.com')?.currentVisibility}%.`,
       whyItMatters: 'Aggregators maintain broad footprint across high-volume general destination keywords.',
       opportunityOrRisk: 'neutral',
-      recommendedAction: 'Focus SEO on high-margin bespoke, private guide, and customized shore excursion clusters where TBL out-converts aggregators.',
-      supportingMetric: `Market Leader Gap: ${(domainScorecards.find(d => d.domain === 'tripadvisor.com')?.currentVisibility || 0) - tblScorecard.currentVisibility}%`,
+      recommendedAction: 'Focus SEO on high-margin bespoke, private guide, and customized shore excursion clusters where PRIMARY out-converts aggregators.',
+      supportingMetric: `Market Leader Gap: ${(domainScorecards.find(d => d.domain === 'tripadvisor.com')?.currentVisibility || 0) - primaryScorecard.currentVisibility}%`,
       comparisonType: 'competitive',
       dataLimitation: 'Based on 1,462 tracked keywords in Google US Mobile campaign.',
     },
@@ -137,7 +137,7 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
               </h1>
             </div>
             <p className="mt-2 text-xs text-slate-600 max-w-3xl leading-relaxed">
-              Shows how ToursByLocals’ organic search visibility changes over time compared with key competitors across the keywords tracked in SEMrush. Higher visibility indicates stronger ranking positions and greater potential to earn clicks from the tracked keyword set.
+              Shows how Example Travel’ organic search visibility changes over time compared with key competitors across the keywords tracked in SEMrush. Higher visibility indicates stronger ranking positions and greater potential to earn clicks from the tracked keyword set.
             </p>
           </div>
         </div>
@@ -156,14 +156,14 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {domainScorecards.map((sc) => {
-            const isTBL = sc.domain === 'toursbylocals.com';
+            const isPRIMARY = sc.domain === 'example.com';
             const isPositive = sc.visibilityAbsChange >= 0;
 
             return (
               <div
                 key={sc.domain}
                 className={`rounded-xl border p-5 transition ${
-                  isTBL
+                  isPRIMARY
                     ? 'border-[#008768] bg-emerald-50/20 shadow-md ring-1 ring-[#008768]/20'
                     : 'border-slate-200 bg-white shadow-sm'
                 }`}
@@ -171,10 +171,10 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
                 <div className="flex items-center justify-between">
                   <span
                     className={`text-xs font-bold ${
-                      isTBL ? 'text-[#008768]' : 'text-slate-800'
+                      isPRIMARY ? 'text-[#008768]' : 'text-slate-800'
                     }`}
                   >
-                    {isTBL ? '★ ToursByLocals' : sc.domain}
+                    {isPRIMARY ? '★ Example Travel' : sc.domain}
                   </span>
                   <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-mono text-slate-600">
                     Live
@@ -226,7 +226,7 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
               Report 1: Visibility Time-Series Trend
             </h2>
             <p className="text-xs text-slate-500">
-              Daily SEMrush visibility index (%) across selected period. ToursByLocals is highlighted.
+              Daily SEMrush visibility index (%) across selected period. Example Travel is highlighted.
             </p>
           </div>
 
@@ -287,7 +287,7 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
                             <div
                               key={entry.name}
                               className={`flex items-center justify-between gap-4 font-mono ${
-                                entry.name === 'toursbylocals.com' ? 'font-bold text-[#008768]' : 'text-slate-600'
+                                entry.name === 'example.com' ? 'font-bold text-[#008768]' : 'text-slate-600'
                               }`}
                             >
                               <span className="flex items-center gap-1.5">
@@ -310,7 +310,7 @@ export const VisibilityReport: React.FC<VisibilityReportProps> = ({
               <Legend
                 wrapperStyle={{ fontSize: '11px', paddingTop: '16px' }}
                 formatter={(val) => (
-                  <span className={val === 'toursbylocals.com' ? 'font-bold text-[#008768]' : 'text-slate-600'}>
+                  <span className={val === 'example.com' ? 'font-bold text-[#008768]' : 'text-slate-600'}>
                     {val}
                   </span>
                 )}
