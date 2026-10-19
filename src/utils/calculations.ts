@@ -155,9 +155,9 @@ export function calculatePositionGaps(
     'getyourguide.com',
   ];
 
-  const tblMetrics = calculateDomainPeriodMetrics(
+  const primaryMetrics = calculateDomainPeriodMetrics(
     observations,
-    'toursbylocals.com',
+    'example.com',
     filter.startDate,
     filter.endDate,
     filter.comparisonStartDate,
@@ -174,9 +174,9 @@ export function calculatePositionGaps(
       filter.comparisonEndDate
     );
 
-    // Formula: Position Gap = ToursByLocals Average Position − Competitor Average Position
-    const currentGap = Number((tblMetrics.currentAveragePosition - compMetrics.currentAveragePosition).toFixed(2));
-    const comparisonGap = Number((tblMetrics.comparisonAveragePosition - compMetrics.comparisonAveragePosition).toFixed(2));
+    // Formula: Position Gap = Example Travel Average Position − Competitor Average Position
+    const currentGap = Number((primaryMetrics.currentAveragePosition - compMetrics.currentAveragePosition).toFixed(2));
+    const comparisonGap = Number((primaryMetrics.comparisonAveragePosition - compMetrics.comparisonAveragePosition).toFixed(2));
 
     // Gap Movement: Current Gap - Previous Gap
     const gapChange = Number((currentGap - comparisonGap).toFixed(2));
@@ -190,9 +190,9 @@ export function calculatePositionGaps(
       comparisonGap,
       gapChange,
       gapImprovement,
-      tblCurrentPos: tblMetrics.currentAveragePosition,
+      primaryCurrentPos: primaryMetrics.currentAveragePosition,
       competitorCurrentPos: compMetrics.currentAveragePosition,
-      tblPrevPos: tblMetrics.comparisonAveragePosition,
+      primaryPrevPos: primaryMetrics.comparisonAveragePosition,
       competitorPrevPos: compMetrics.comparisonAveragePosition,
     };
   });
