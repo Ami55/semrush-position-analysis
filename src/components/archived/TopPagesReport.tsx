@@ -73,17 +73,17 @@ export const TopPagesReport: React.FC<TopPagesReportProps> = ({
         totalSearchVolume += k.searchVolume;
         estimatedTraffic += k.estimatedTraffic || 0;
 
-        if (k.tblPosition !== null && k.tblPosition > 0) {
-          posSum += k.tblPosition;
+        if (k.primaryPosition !== null && k.primaryPosition > 0) {
+          posSum += k.primaryPosition;
           validPosCount++;
-          if (bestPosition === null || k.tblPosition < bestPosition) {
-            bestPosition = k.tblPosition;
+          if (bestPosition === null || k.primaryPosition < bestPosition) {
+            bestPosition = k.primaryPosition;
           }
 
-          if (k.tblPosition <= 3) top3++;
-          if (k.tblPosition <= 10) top10++;
-          if (k.tblPosition <= 20) top20++;
-          if (k.tblPosition <= 100) top100++;
+          if (k.primaryPosition <= 3) top3++;
+          if (k.primaryPosition <= 10) top10++;
+          if (k.primaryPosition <= 20) top20++;
+          if (k.primaryPosition <= 100) top100++;
         }
 
         k.tags.forEach((t) => {
