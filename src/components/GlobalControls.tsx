@@ -128,8 +128,8 @@ export const GlobalControls: React.FC<GlobalControlsProps> = ({
   };
 
   const toggleDomain = (domain: DomainName) => {
-    // ToursByLocals is always included
-    if (domain === 'toursbylocals.com') return;
+    // Example Travel is always included
+    if (domain === 'example.com') return;
 
     let newDomains: DomainName[];
     if (filter.selectedDomains.includes(domain)) {
@@ -146,7 +146,7 @@ export const GlobalControls: React.FC<GlobalControlsProps> = ({
   };
 
   const allDomains: { id: DomainName; label: string; color: string }[] = [
-    { id: 'toursbylocals.com', label: 'ToursByLocals (Primary)', color: '#008768' },
+    { id: 'example.com', label: 'Example Travel (Primary)', color: '#008768' },
     { id: 'tripadvisor.com', label: 'Tripadvisor', color: '#00aa6c' },
     { id: 'viator.com', label: 'Viator', color: '#e84c3d' },
     { id: 'getyourguide.com', label: 'GetYourGuide', color: '#ff5533' },
@@ -222,17 +222,17 @@ export const GlobalControls: React.FC<GlobalControlsProps> = ({
                 <div className="space-y-1">
                   {allDomains.map((d) => {
                     const isSelected = filter.selectedDomains.includes(d.id);
-                    const isTBL = d.id === 'toursbylocals.com';
+                    const isPRIMARY = d.id === 'example.com';
                     return (
                       <button
                         key={d.id}
                         onClick={() => toggleDomain(d.id)}
-                        disabled={isTBL}
+                        disabled={isPRIMARY}
                         className={`flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left text-xs transition ${
-                          isTBL ? 'bg-emerald-50/60 cursor-default' : 'hover:bg-slate-100'
+                          isPRIMARY ? 'bg-emerald-50/60 cursor-default' : 'hover:bg-slate-100'
                         }`}
                       >
-                        <span className={`font-medium ${isTBL ? 'text-[#008768] font-bold' : 'text-slate-700'}`}>
+                        <span className={`font-medium ${isPRIMARY ? 'text-[#008768] font-bold' : 'text-slate-700'}`}>
                           {d.label}
                         </span>
                         {isSelected ? (
