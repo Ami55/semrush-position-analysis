@@ -48,7 +48,7 @@ export default function App() {
     comparisonStartDate: '2026-06-01',
     comparisonEndDate: '2026-06-30',
     selectedDomains: [
-      'toursbylocals.com',
+      'example.com',
       'tripadvisor.com',
       'viator.com',
       'getyourguide.com',
@@ -92,7 +92,7 @@ export default function App() {
   const handleExportCSV = () => {
     exportKeywordsToCSV(
       archivedKeywords,
-      `toursbylocals_semrush_keywords_${snapshotMetadata.currentSnapshotDate}.csv`
+      `example_travel_semrush_keywords_${snapshotMetadata.currentSnapshotDate}.csv`
     );
   };
 
