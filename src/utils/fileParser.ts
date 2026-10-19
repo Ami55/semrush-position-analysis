@@ -31,32 +31,32 @@ export function autoDetectFieldMapping(headers: string[]): FieldMapping {
   // 1. Keyword
   mapping.keyword = findMatch(['keyword', 'query', 'search query', 'term']) || headers[0] || '';
 
-  // 2. ToursByLocals / Primary domain rank
-  const tblRankHeader = headers.find(h => 
-    (h.includes('toursbylocals.com') || h.includes('toursbylocals')) && 
+  // 2. Example Travel / Primary domain rank
+  const primaryRankHeader = headers.find(h => 
+    (h.includes('example.com') || h.includes('example_travel')) && 
     !h.includes('_landing') && 
     !h.includes('_visibility') && 
     !h.includes('_type') && 
     !h.includes('_difference')
   );
-  mapping.currentPosition = tblRankHeader || findMatch(['current position', 'position', 'rank', 'tbl position', 'tbl rank', 'google position']) || '';
+  mapping.currentPosition = primaryRankHeader || findMatch(['current position', 'position', 'rank', 'primary position', 'primary rank', 'google position']) || '';
 
   // 3. Difference / Previous position
-  const tblDiffHeader = headers.find(h => 
-    (h.includes('toursbylocals.com') || h.includes('toursbylocals')) && 
+  const primaryDiffHeader = headers.find(h => 
+    (h.includes('example.com') || h.includes('example_travel')) && 
     h.includes('_difference') && 
     !h.includes('_visibility')
   );
-  mapping.previousPosition = tblDiffHeader || findMatch(['previous position', 'prev position', 'prev rank', 'prior position', 'difference']) || '';
+  mapping.previousPosition = primaryDiffHeader || findMatch(['previous position', 'prev position', 'prev rank', 'prior position', 'difference']) || '';
 
   // 4. Search volume & CPC & URL
   mapping.searchVolume = findMatch(['search volume', 'volume', 'sv', 'monthly searches']) || '';
   
-  const tblLandingHeader = headers.find(h => 
-    (h.includes('toursbylocals.com') || h.includes('toursbylocals')) && 
+  const primaryLandingHeader = headers.find(h => 
+    (h.includes('example.com') || h.includes('example_travel')) && 
     h.includes('_landing')
   );
-  mapping.rankingUrl = tblLandingHeader || findMatch(['landing page', 'ranking url', 'url', 'page url', 'target url']) || '';
+  mapping.rankingUrl = primaryLandingHeader || findMatch(['landing page', 'ranking url', 'url', 'page url', 'target url']) || '';
 
   // 5. Intent & Tags
   mapping.intent = findMatch(['intents', 'intent', 'search intent']) || '';
@@ -265,7 +265,7 @@ export function validateKeywordData(
 
     let keywordPositionGap: number | null = null;
     if (currentPos !== null && bestCompetitorPosition !== null) {
-      keywordPositionGap = currentPos - bestCompetitorPosition; // Positive = TBL ranks worse
+      keywordPositionGap = currentPos - bestCompetitorPosition; // Positive = PRIMARY ranks worse
     }
 
     // Calculate CTR estimated traffic if not provided
@@ -297,13 +297,13 @@ export function validateKeywordData(
       keywordDifficulty: kd,
       intent,
       tags,
-      rankingUrl: rankingUrl || 'https://www.toursbylocals.com/',
+      rankingUrl: rankingUrl || 'https://www.example.com/',
       currentPosition: currentPos,
       previousPosition: computedPrevPos,
       positionImprovement,
       isNew,
       isLost,
-      tblPosition: currentPos,
+      primaryPosition: currentPos,
       tripadvisorPosition: tripadvisorPos,
       viatorPosition: viatorPos,
       getyourguidePosition: gygPos,
@@ -373,7 +373,7 @@ export function extractUrlSlug(rawUrl: string): string {
       const slug = urlObj.pathname + urlObj.search;
       return slug.startsWith('/') ? slug : `/${slug}`;
     }
-    // If it's a domain path like toursbylocals.com/Rome-Tours
+    // If it's a domain path like example.com/Rome-Tours
     const withoutDomain = trimmed.replace(/^https?:\/\//i, '').replace(/^(?:www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/|$)/i, '/');
     const finalSlug = withoutDomain.startsWith('/') ? withoutDomain : `/${withoutDomain}`;
     return finalSlug === '' ? '/' : finalSlug;

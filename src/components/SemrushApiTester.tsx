@@ -66,7 +66,7 @@ export const SemrushApiTester: React.FC<SemrushApiTesterProps> = ({ onBack }) =>
 
   // Live Query Explorer state
   const [queryType, setQueryType] = useState<'domain_ranks' | 'domain_organic' | 'phrase_this' | 'tracking_campaigns'>('domain_ranks');
-  const [targetDomain, setTargetDomain] = useState<string>('toursbylocals.com');
+  const [targetDomain, setTargetDomain] = useState<string>('example.com');
   const [targetPhrase, setTargetPhrase] = useState<string>('private tour guide');
   const [targetDatabase, setTargetDatabase] = useState<string>('us');
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
@@ -544,7 +544,7 @@ export const SemrushApiTester: React.FC<SemrushApiTesterProps> = ({ onBack }) =>
                     type="text"
                     value={targetDomain}
                     onChange={(e) => setTargetDomain(e.target.value)}
-                    placeholder="e.g. toursbylocals.com"
+                    placeholder="e.g. example.com"
                     className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-800 focus:border-orange-500 focus:outline-none"
                   />
                 </div>

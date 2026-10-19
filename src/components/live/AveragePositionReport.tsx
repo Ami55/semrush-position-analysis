@@ -46,14 +46,14 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
   filter,
 }) => {
   const [activeDomains, setActiveDomains] = useState<DomainName[]>([
-    'toursbylocals.com',
+    'example.com',
     'tripadvisor.com',
     'viator.com',
     'getyourguide.com',
   ]);
 
   const domainColors: Record<DomainName, { color: string; strokeWidth: number }> = {
-    'toursbylocals.com': { color: '#008768', strokeWidth: 3.5 },
+    'example.com': { color: '#008768', strokeWidth: 3.5 },
     'tripadvisor.com': { color: '#00aa6c', strokeWidth: 2 },
     'viator.com': { color: '#e84c3d', strokeWidth: 2 },
     'getyourguide.com': { color: '#ff7700', strokeWidth: 2 },
@@ -86,7 +86,7 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
 
   // Compute domain scorecards
   const domains: DomainName[] = [
-    'toursbylocals.com',
+    'example.com',
     'tripadvisor.com',
     'viator.com',
     'getyourguide.com',
@@ -103,17 +103,17 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
     )
   );
 
-  const tblScorecard = domainScorecards.find((d) => d.domain === 'toursbylocals.com')!;
+  const primaryScorecard = domainScorecards.find((d) => d.domain === 'example.com')!;
   const gaps: PositionGapData[] = calculatePositionGaps(filter, RAW_DAILY_OBSERVATIONS);
 
   // Takeaways
   const avgPosTakeaways: TakeawayItem[] = [
     {
-      whatHappened: `ToursByLocals Average Position improved to ${tblScorecard.currentAveragePosition} (up ${tblScorecard.positionImprovement} rank positions from ${tblScorecard.comparisonAveragePosition}).`,
+      whatHappened: `Example Travel Average Position improved to ${primaryScorecard.currentAveragePosition} (up ${primaryScorecard.positionImprovement} rank positions from ${primaryScorecard.comparisonAveragePosition}).`,
       whyItMatters: 'Lower Average Position values indicate stronger search rankings closer to top page-one positions.',
       opportunityOrRisk: 'opportunity',
       recommendedAction: 'Target striking distance positions 11-20 to push the overall domain average position below 18.0.',
-      supportingMetric: `Current: ${tblScorecard.currentAveragePosition} vs Prior: ${tblScorecard.comparisonAveragePosition}`,
+      supportingMetric: `Current: ${primaryScorecard.currentAveragePosition} vs Prior: ${primaryScorecard.comparisonAveragePosition}`,
       comparisonType: filter.comparisonPreset,
     },
     {
@@ -141,7 +141,7 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
               </h1>
             </div>
             <p className="mt-2 text-xs text-slate-600 max-w-3xl leading-relaxed">
-              Shows how the average ranking position of ToursByLocals and key competitors changes over time across the tracked keyword set. Lower Average Position values indicate stronger search rankings. Position 1 is top.
+              Shows how the average ranking position of Example Travel and key competitors changes over time across the tracked keyword set. Lower Average Position values indicate stronger search rankings. Position 1 is top.
             </p>
           </div>
         </div>
@@ -160,7 +160,7 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {domainScorecards.map((sc) => {
-            const isTBL = sc.domain === 'toursbylocals.com';
+            const isPRIMARY = sc.domain === 'example.com';
             // Position improvement = Previous - Current. Positive = Green (better ranking)
             const isImproved = sc.positionImprovement >= 0;
 
@@ -168,7 +168,7 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
               <div
                 key={sc.domain}
                 className={`rounded-xl border p-5 transition ${
-                  isTBL
+                  isPRIMARY
                     ? 'border-[#008768] bg-emerald-50/20 shadow-md ring-1 ring-[#008768]/20'
                     : 'border-slate-200 bg-white shadow-sm'
                 }`}
@@ -176,10 +176,10 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
                 <div className="flex items-center justify-between">
                   <span
                     className={`text-xs font-bold ${
-                      isTBL ? 'text-[#008768]' : 'text-slate-800'
+                      isPRIMARY ? 'text-[#008768]' : 'text-slate-800'
                     }`}
                   >
-                    {isTBL ? '★ ToursByLocals' : sc.domain}
+                    {isPRIMARY ? '★ Example Travel' : sc.domain}
                   </span>
                   <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-mono text-slate-600">
                     Live
@@ -248,7 +248,7 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-800">
-                    TBL vs {gap.competitor.replace('.com', '')}
+                    PRIMARY vs {gap.competitor.replace('.com', '')}
                   </span>
                   <span
                     className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
@@ -279,7 +279,7 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
 
                 <div className="mt-3 space-y-1 border-t border-slate-100 pt-2.5 text-[11px] text-slate-500 font-mono">
                   <div className="flex justify-between">
-                    <span>TBL Rank: <strong>{gap.tblCurrentPos}</strong></span>
+                    <span>PRIMARY Rank: <strong>{gap.primaryCurrentPos}</strong></span>
                     <span>Competitor: <strong>{gap.competitorCurrentPos}</strong></span>
                   </div>
                   <div className="flex justify-between text-slate-400">
@@ -367,7 +367,7 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
                             <div
                               key={entry.name}
                               className={`flex items-center justify-between gap-4 font-mono ${
-                                entry.name === 'toursbylocals.com' ? 'font-bold text-[#008768]' : 'text-slate-600'
+                                entry.name === 'example.com' ? 'font-bold text-[#008768]' : 'text-slate-600'
                               }`}
                             >
                               <span className="flex items-center gap-1.5">
@@ -390,7 +390,7 @@ export const AveragePositionReport: React.FC<AveragePositionReportProps> = ({
               <Legend
                 wrapperStyle={{ fontSize: '11px', paddingTop: '16px' }}
                 formatter={(val) => (
-                  <span className={val === 'toursbylocals.com' ? 'font-bold text-[#008768]' : 'text-slate-600'}>
+                  <span className={val === 'example.com' ? 'font-bold text-[#008768]' : 'text-slate-600'}>
                     {val}
                   </span>
                 )}

@@ -39,21 +39,21 @@ export const EstimatedTrafficReport: React.FC<EstimatedTrafficReportProps> = ({
   filter,
 }) => {
   const [activeDomains, setActiveDomains] = useState<DomainName[]>([
-    'toursbylocals.com',
+    'example.com',
     'tripadvisor.com',
     'viator.com',
     'getyourguide.com',
   ]);
 
   const domainColors: Record<DomainName, { color: string; strokeWidth: number }> = {
-    'toursbylocals.com': { color: '#008768', strokeWidth: 3.5 },
+    'example.com': { color: '#008768', strokeWidth: 3.5 },
     'tripadvisor.com': { color: '#00aa6c', strokeWidth: 2 },
     'viator.com': { color: '#e84c3d', strokeWidth: 2 },
     'getyourguide.com': { color: '#ff7700', strokeWidth: 2 },
   };
 
   const domains: DomainName[] = [
-    'toursbylocals.com',
+    'example.com',
     'tripadvisor.com',
     'viator.com',
     'getyourguide.com',
@@ -85,15 +85,15 @@ export const EstimatedTrafficReport: React.FC<EstimatedTrafficReportProps> = ({
     )
   );
 
-  const tbl = domainMetrics.find((d) => d.domain === 'toursbylocals.com') || domainMetrics[0];
+  const primary = domainMetrics.find((d) => d.domain === 'example.com') || domainMetrics[0];
 
   const trafficTakeaways: TakeawayItem[] = [
     {
-      whatHappened: `ToursByLocals averaged ${(tbl?.currentEstimatedTraffic ?? 0).toLocaleString()} daily estimated traffic index points (+${(tbl?.trafficAbsChange ?? 0).toLocaleString()}, ${(tbl?.trafficPctChange ?? 0) >= 0 ? '+' : ''}${tbl?.trafficPctChange ?? 0}% vs prior period).`,
+      whatHappened: `Example Travel averaged ${(primary?.currentEstimatedTraffic ?? 0).toLocaleString()} daily estimated traffic index points (+${(primary?.trafficAbsChange ?? 0).toLocaleString()}, ${(primary?.trafficPctChange ?? 0) >= 0 ? '+' : ''}${primary?.trafficPctChange ?? 0}% vs prior period).`,
       whyItMatters: 'Modelled traffic growth reflects ranking improvements on high-volume search queries.',
       opportunityOrRisk: 'opportunity',
       recommendedAction: 'Align promotional tour inventory with the top 10 highest-traffic landing pages.',
-      supportingMetric: `Avg Daily Est Traffic: ${(tbl?.currentEstimatedTraffic ?? 0).toLocaleString()} vs Prior ${(tbl?.comparisonEstimatedTraffic ?? 0).toLocaleString()}`,
+      supportingMetric: `Avg Daily Est Traffic: ${(primary?.currentEstimatedTraffic ?? 0).toLocaleString()} vs Prior ${(primary?.comparisonEstimatedTraffic ?? 0).toLocaleString()}`,
       comparisonType: filter.comparisonPreset,
       dataLimitation: 'SEMrush Estimated Traffic is a modelled statistical index, not actual Google Analytics session traffic.',
     },
@@ -142,21 +142,21 @@ export const EstimatedTrafficReport: React.FC<EstimatedTrafficReportProps> = ({
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {domainMetrics.map((dm) => {
-            const isTBL = dm.domain === 'toursbylocals.com';
+            const isPRIMARY = dm.domain === 'example.com';
             const isPositive = dm.trafficAbsChange >= 0;
 
             return (
               <div
                 key={dm.domain}
                 className={`rounded-xl border p-5 transition ${
-                  isTBL
+                  isPRIMARY
                     ? 'border-[#008768] bg-emerald-50/20 shadow-md ring-1 ring-[#008768]/20'
                     : 'border-slate-200 bg-white shadow-sm'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className={`text-xs font-bold ${isTBL ? 'text-[#008768]' : 'text-slate-800'}`}>
-                    {isTBL ? '★ ToursByLocals' : dm.domain}
+                  <span className={`text-xs font-bold ${isPRIMARY ? 'text-[#008768]' : 'text-slate-800'}`}>
+                    {isPRIMARY ? '★ Example Travel' : dm.domain}
                   </span>
                   <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-mono text-slate-600">
                     Live
@@ -256,7 +256,7 @@ export const EstimatedTrafficReport: React.FC<EstimatedTrafficReportProps> = ({
                           <div
                             key={entry.name}
                             className={`flex items-center justify-between gap-4 ${
-                              entry.name === 'toursbylocals.com' ? 'font-bold text-[#008768]' : 'text-slate-600'
+                              entry.name === 'example.com' ? 'font-bold text-[#008768]' : 'text-slate-600'
                             }`}
                           >
                             <span>{entry.name}:</span>

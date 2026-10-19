@@ -49,7 +49,7 @@ export const PeriodComparisonReport: React.FC<PeriodComparisonReportProps> = ({
   const [mode, setMode] = useState<'quarterly' | 'monthly'>(initialMode);
   const [selectedQuarter, setSelectedQuarter] = useState<'Q3_2026' | 'Q2_2026' | 'Q1_2026'>('Q3_2026');
   const [selectedMonth, setSelectedMonth] = useState<'2026-07' | '2026-06' | '2026-05'>('2026-07');
-  const [selectedDomain, setSelectedDomain] = useState<DomainName>('toursbylocals.com');
+  const [selectedDomain, setSelectedDomain] = useState<DomainName>('example.com');
 
   // Compute comparable period rows using Wednesday-aligned sampling (dayOfWeek = 3)
   const computeComparablePeriodRow = (
@@ -196,7 +196,7 @@ export const PeriodComparisonReport: React.FC<PeriodComparisonReportProps> = ({
               onChange={(e) => setSelectedDomain(e.target.value as DomainName)}
               className="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-800"
             >
-              <option value="toursbylocals.com">toursbylocals.com (Primary)</option>
+              <option value="example.com">example.com (Primary)</option>
               <option value="tripadvisor.com">tripadvisor.com</option>
               <option value="viator.com">viator.com</option>
               <option value="getyourguide.com">getyourguide.com</option>

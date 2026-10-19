@@ -36,9 +36,9 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
   campaign,
   filter,
 }) => {
-  const tblMetrics: DomainAggregatedMetric = calculateDomainPeriodMetrics(
+  const primaryMetrics: DomainAggregatedMetric = calculateDomainPeriodMetrics(
     RAW_DAILY_OBSERVATIONS,
-    'toursbylocals.com',
+    'example.com',
     filter.startDate,
     filter.endDate,
     filter.comparisonStartDate,
@@ -54,7 +54,7 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
       title: 'Accelerate Striking-Distance Keyword Push (Rankings 11–20)',
       description:
         'Expand on-page content, enrich guide bios, and integrate localized FAQ schema on key landing pages (e.g. Rome, Tokyo, Florence, San Sebastian) to move high-intent commercial keywords onto Page 1.',
-      supportingEvidence: `${tblMetrics.currentTop20 - tblMetrics.currentTop10} keywords currently rank in positions 11–20 representing over 48,000 monthly search volume.`,
+      supportingEvidence: `${primaryMetrics.currentTop20 - primaryMetrics.currentTop10} keywords currently rank in positions 11–20 representing over 48,000 monthly search volume.`,
       expectedImpact: '+12% to +18% estimated click growth across high-margin private tour categories.',
       effort: 'Medium',
       recommendedOwner: 'SEO',
@@ -65,7 +65,7 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
       title: 'Target Competitor Vulnerabilities in Private & Shore Excursion Segments',
       description:
         'Viator and TripAdvisor hold Top 3 positions for broad city tours but have weaker authority on custom shore excursions (Civitavecchia, Kusadasi, Naples). Launch targeted port-specific hub pages.',
-      supportingEvidence: 'TBL maintains a -1 to -3 rank advantage on bespoke queries while trailing by 8+ positions on generic aggregator queries.',
+      supportingEvidence: 'PRIMARY maintains a -1 to -3 rank advantage on bespoke queries while trailing by 8+ positions on generic aggregator queries.',
       expectedImpact: 'Capture high-ticket cruiser bookings directly bypassing aggregator commissions.',
       effort: 'High',
       recommendedOwner: 'Content',
@@ -98,32 +98,32 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
   // Key takeaways for Executive Summary
   const executiveTakeaways: TakeawayItem[] = [
     {
-      whatHappened: `ToursByLocals organic visibility reached ${tblMetrics.currentVisibility}% (${tblMetrics.visibilityAbsChange >= 0 ? '+' : ''}${tblMetrics.visibilityAbsChange}% vs comparison period).`,
+      whatHappened: `Example Travel organic visibility reached ${primaryMetrics.currentVisibility}% (${primaryMetrics.visibilityAbsChange >= 0 ? '+' : ''}${primaryMetrics.visibilityAbsChange}% vs comparison period).`,
       whyItMatters: 'Positive visibility momentum confirms gains in high-intent keyword rankings across key European and Asian private tour destinations.',
       opportunityOrRisk: 'opportunity',
       recommendedAction: 'Maintain content refresh cadence and strengthen local guide profile internal linking.',
-      supportingMetric: `Visibility: ${tblMetrics.currentVisibility}% (${tblMetrics.visibilityPctChange >= 0 ? '+' : ''}${tblMetrics.visibilityPctChange}% change)`,
+      supportingMetric: `Visibility: ${primaryMetrics.currentVisibility}% (${primaryMetrics.visibilityPctChange >= 0 ? '+' : ''}${primaryMetrics.visibilityPctChange}% change)`,
       comparisonType: filter.comparisonPreset,
     },
     {
-      whatHappened: `Average Position improved to ${tblMetrics.currentAveragePosition} (improved by ${tblMetrics.positionImprovement} positions).`,
+      whatHappened: `Average Position improved to ${primaryMetrics.currentAveragePosition} (improved by ${primaryMetrics.positionImprovement} positions).`,
       whyItMatters: 'Lower average position signifies that ranking keywords are climbing closer to top organic search positions.',
       opportunityOrRisk: 'opportunity',
       recommendedAction: 'Focus optimization on positions 11-20 to convert striking distance rankings into Top 10 traffic drivers.',
-      supportingMetric: `Avg Pos: ${tblMetrics.currentAveragePosition} (Prior: ${tblMetrics.comparisonAveragePosition})`,
+      supportingMetric: `Avg Pos: ${primaryMetrics.currentAveragePosition} (Prior: ${primaryMetrics.comparisonAveragePosition})`,
       comparisonType: filter.comparisonPreset,
     },
     {
-      whatHappened: `Keywords in Top 10 grew to ${(tblMetrics.currentTop10 ?? 0).toLocaleString()} (+${tblMetrics.top10AbsChange} keywords, ${tblMetrics.top10PctChange >= 0 ? '+' : ''}${tblMetrics.top10PctChange}%).`,
+      whatHappened: `Keywords in Top 10 grew to ${(primaryMetrics.currentTop10 ?? 0).toLocaleString()} (+${primaryMetrics.top10AbsChange} keywords, ${primaryMetrics.top10PctChange >= 0 ? '+' : ''}${primaryMetrics.top10PctChange}%).`,
       whyItMatters: 'Top 10 rankings generate over 85% of total organic click-through volume in the tracked Position Tracking set.',
       opportunityOrRisk: 'opportunity',
       recommendedAction: 'Protect page-one positions by monitoring competitor price and itinerary updates.',
-      supportingMetric: `Top 10 Count: ${tblMetrics.currentTop10} vs Prior ${tblMetrics.comparisonTop10}`,
+      supportingMetric: `Top 10 Count: ${primaryMetrics.currentTop10} vs Prior ${primaryMetrics.comparisonTop10}`,
       comparisonType: filter.comparisonPreset,
     },
     {
       whatHappened: `Position gap with TripAdvisor stands at +${gaps[0]?.currentGap || 9.4} and Viator at +${gaps[1]?.currentGap || 6.2}.`,
-      whyItMatters: 'Aggregators maintain high domain authority on broad queries; TBL wins decisively on high-intent bespoke guide queries.',
+      whyItMatters: 'Aggregators maintain high domain authority on broad queries; PRIMARY wins decisively on high-intent bespoke guide queries.',
       opportunityOrRisk: 'risk',
       recommendedAction: 'Differentiate with unique localized storytelling and guide-first schema rather than competing on generic aggregations.',
       supportingMetric: `TripAdvisor Gap: +${gaps[0]?.currentGap} pos (Gap improvement: ${gaps[0]?.gapImprovement >= 0 ? '+' : ''}${gaps[0]?.gapImprovement})`,
@@ -171,24 +171,24 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{tblMetrics.currentVisibility}%</span>
+              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{primaryMetrics.currentVisibility}%</span>
             </div>
             <div className="flex items-center gap-1 whitespace-nowrap text-xs">
-              {tblMetrics.visibilityAbsChange >= 0 ? (
+              {primaryMetrics.visibilityAbsChange >= 0 ? (
                 <span className="flex items-center font-bold text-emerald-600">
                   <ArrowUpRight className="h-3.5 w-3.5" />
-                  +{tblMetrics.visibilityAbsChange}%
+                  +{primaryMetrics.visibilityAbsChange}%
                 </span>
               ) : (
                 <span className="flex items-center font-bold text-rose-600">
                   <ArrowDownRight className="h-3.5 w-3.5" />
-                  {tblMetrics.visibilityAbsChange}%
+                  {primaryMetrics.visibilityAbsChange}%
                 </span>
               )}
-              <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.visibilityPctChange >= 0 ? '+' : ''}{tblMetrics.visibilityPctChange}%)</span>
+              <span className="text-[10px] text-slate-400 font-mono">({primaryMetrics.visibilityPctChange >= 0 ? '+' : ''}{primaryMetrics.visibilityPctChange}%)</span>
             </div>
             <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
-              Prior: <strong className="text-slate-700">{tblMetrics.comparisonVisibility}%</strong>
+              Prior: <strong className="text-slate-700">{primaryMetrics.comparisonVisibility}%</strong>
             </div>
           </div>
 
@@ -199,24 +199,24 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{tblMetrics.currentAveragePosition}</span>
+              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{primaryMetrics.currentAveragePosition}</span>
             </div>
             <div className="flex items-center gap-1 whitespace-nowrap text-xs">
-              {tblMetrics.positionImprovement >= 0 ? (
+              {primaryMetrics.positionImprovement >= 0 ? (
                 <span className="flex items-center font-bold text-emerald-600" title="Position improved (lower number is better)">
                   <ArrowUpRight className="h-3.5 w-3.5" />
-                  +{tblMetrics.positionImprovement} pos
+                  +{primaryMetrics.positionImprovement} pos
                 </span>
               ) : (
                 <span className="flex items-center font-bold text-rose-600" title="Position declined">
                   <ArrowDownRight className="h-3.5 w-3.5" />
-                  {tblMetrics.positionImprovement} pos
+                  {primaryMetrics.positionImprovement} pos
                 </span>
               )}
-              <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.positionImprovementPct >= 0 ? '+' : ''}{tblMetrics.positionImprovementPct}%)</span>
+              <span className="text-[10px] text-slate-400 font-mono">({primaryMetrics.positionImprovementPct >= 0 ? '+' : ''}{primaryMetrics.positionImprovementPct}%)</span>
             </div>
             <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
-              Prior: <strong className="text-slate-700">{tblMetrics.comparisonAveragePosition}</strong>
+              Prior: <strong className="text-slate-700">{primaryMetrics.comparisonAveragePosition}</strong>
             </div>
           </div>
 
@@ -227,24 +227,24 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(tblMetrics.currentEstimatedTraffic ?? 0).toLocaleString()}</span>
+              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(primaryMetrics.currentEstimatedTraffic ?? 0).toLocaleString()}</span>
             </div>
             <div className="flex items-center gap-1 whitespace-nowrap text-xs">
-              {(tblMetrics.trafficAbsChange ?? 0) >= 0 ? (
+              {(primaryMetrics.trafficAbsChange ?? 0) >= 0 ? (
                 <span className="flex items-center font-bold text-emerald-600">
                   <ArrowUpRight className="h-3.5 w-3.5" />
-                  +{(tblMetrics.trafficAbsChange ?? 0).toLocaleString()}
+                  +{(primaryMetrics.trafficAbsChange ?? 0).toLocaleString()}
                 </span>
               ) : (
                 <span className="flex items-center font-bold text-rose-600">
                   <ArrowDownRight className="h-3.5 w-3.5" />
-                  {(tblMetrics.trafficAbsChange ?? 0).toLocaleString()}
+                  {(primaryMetrics.trafficAbsChange ?? 0).toLocaleString()}
                 </span>
               )}
-              <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.trafficPctChange >= 0 ? '+' : ''}{tblMetrics.trafficPctChange}%)</span>
+              <span className="text-[10px] text-slate-400 font-mono">({primaryMetrics.trafficPctChange >= 0 ? '+' : ''}{primaryMetrics.trafficPctChange}%)</span>
             </div>
             <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
-              Prior: <strong className="text-slate-700">{(tblMetrics.comparisonEstimatedTraffic ?? 0).toLocaleString()}</strong>
+              Prior: <strong className="text-slate-700">{(primaryMetrics.comparisonEstimatedTraffic ?? 0).toLocaleString()}</strong>
             </div>
           </div>
 
@@ -255,16 +255,16 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-2xl font-extrabold text-[#008768] font-mono">{(tblMetrics.currentTop3 ?? 0).toLocaleString()}</span>
+              <span className="text-2xl font-extrabold text-[#008768] font-mono">{(primaryMetrics.currentTop3 ?? 0).toLocaleString()}</span>
             </div>
             <div className="flex items-center gap-1 whitespace-nowrap text-xs">
-              <span className={`flex items-center font-bold ${tblMetrics.top3AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {tblMetrics.top3AbsChange >= 0 ? '+' : ''}{tblMetrics.top3AbsChange} KWs
+              <span className={`flex items-center font-bold ${primaryMetrics.top3AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {primaryMetrics.top3AbsChange >= 0 ? '+' : ''}{primaryMetrics.top3AbsChange} KWs
               </span>
-              <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.top3PctChange >= 0 ? '+' : ''}{tblMetrics.top3PctChange}%)</span>
+              <span className="text-[10px] text-slate-400 font-mono">({primaryMetrics.top3PctChange >= 0 ? '+' : ''}{primaryMetrics.top3PctChange}%)</span>
             </div>
             <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
-              Prior: <strong className="text-slate-700">{(tblMetrics.comparisonTop3 ?? 0).toLocaleString()}</strong>
+              Prior: <strong className="text-slate-700">{(primaryMetrics.comparisonTop3 ?? 0).toLocaleString()}</strong>
             </div>
           </div>
 
@@ -275,16 +275,16 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(tblMetrics.currentTop10 ?? 0).toLocaleString()}</span>
+              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(primaryMetrics.currentTop10 ?? 0).toLocaleString()}</span>
             </div>
             <div className="flex items-center gap-1 whitespace-nowrap text-xs">
-              <span className={`flex items-center font-bold ${tblMetrics.top10AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {tblMetrics.top10AbsChange >= 0 ? '+' : ''}{tblMetrics.top10AbsChange} KWs
+              <span className={`flex items-center font-bold ${primaryMetrics.top10AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {primaryMetrics.top10AbsChange >= 0 ? '+' : ''}{primaryMetrics.top10AbsChange} KWs
               </span>
-              <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.top10PctChange >= 0 ? '+' : ''}{tblMetrics.top10PctChange}%)</span>
+              <span className="text-[10px] text-slate-400 font-mono">({primaryMetrics.top10PctChange >= 0 ? '+' : ''}{primaryMetrics.top10PctChange}%)</span>
             </div>
             <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
-              Prior: <strong className="text-slate-700">{(tblMetrics.comparisonTop10 ?? 0).toLocaleString()}</strong>
+              Prior: <strong className="text-slate-700">{(primaryMetrics.comparisonTop10 ?? 0).toLocaleString()}</strong>
             </div>
           </div>
 
@@ -295,16 +295,16 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(tblMetrics.currentTop20 ?? 0).toLocaleString()}</span>
+              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(primaryMetrics.currentTop20 ?? 0).toLocaleString()}</span>
             </div>
             <div className="flex items-center gap-1 whitespace-nowrap text-xs">
-              <span className={`flex items-center font-bold ${tblMetrics.top20AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {tblMetrics.top20AbsChange >= 0 ? '+' : ''}{tblMetrics.top20AbsChange} KWs
+              <span className={`flex items-center font-bold ${primaryMetrics.top20AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {primaryMetrics.top20AbsChange >= 0 ? '+' : ''}{primaryMetrics.top20AbsChange} KWs
               </span>
-              <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.top20PctChange >= 0 ? '+' : ''}{tblMetrics.top20PctChange}%)</span>
+              <span className="text-[10px] text-slate-400 font-mono">({primaryMetrics.top20PctChange >= 0 ? '+' : ''}{primaryMetrics.top20PctChange}%)</span>
             </div>
             <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
-              Prior: <strong className="text-slate-700">{(tblMetrics.comparisonTop20 ?? 0).toLocaleString()}</strong>
+              Prior: <strong className="text-slate-700">{(primaryMetrics.comparisonTop20 ?? 0).toLocaleString()}</strong>
             </div>
           </div>
 
@@ -315,16 +315,16 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
               <span className="rounded bg-slate-100 px-1 text-[9px] font-mono text-slate-600">Live</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(tblMetrics.currentTop100 ?? 0).toLocaleString()}</span>
+              <span className="text-2xl font-extrabold text-[#002B49] font-mono">{(primaryMetrics.currentTop100 ?? 0).toLocaleString()}</span>
             </div>
             <div className="flex items-center gap-1 whitespace-nowrap text-xs">
-              <span className={`flex items-center font-bold ${tblMetrics.top100AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {tblMetrics.top100AbsChange >= 0 ? '+' : ''}{tblMetrics.top100AbsChange} KWs
+              <span className={`flex items-center font-bold ${primaryMetrics.top100AbsChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {primaryMetrics.top100AbsChange >= 0 ? '+' : ''}{primaryMetrics.top100AbsChange} KWs
               </span>
-              <span className="text-[10px] text-slate-400 font-mono">({tblMetrics.top100PctChange >= 0 ? '+' : ''}{tblMetrics.top100PctChange}%)</span>
+              <span className="text-[10px] text-slate-400 font-mono">({primaryMetrics.top100PctChange >= 0 ? '+' : ''}{primaryMetrics.top100PctChange}%)</span>
             </div>
             <div className="border-t border-slate-100 pt-2 text-[10px] text-slate-500">
-              Prior: <strong className="text-slate-700">{(tblMetrics.comparisonTop100 ?? 0).toLocaleString()}</strong>
+              Prior: <strong className="text-slate-700">{(primaryMetrics.comparisonTop100 ?? 0).toLocaleString()}</strong>
             </div>
           </div>
         </div>
@@ -346,19 +346,19 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
             <div className="rounded-lg bg-white p-3 border border-emerald-100 shadow-2xs">
               <span className="font-semibold text-emerald-800 block">1. Search Visibility Expansion</span>
               <p className="mt-0.5 text-slate-600">
-                Visibility increased by <strong>+{tblMetrics.visibilityAbsChange}%</strong> (reaching {tblMetrics.currentVisibility}%), driven by rank gains in key European destination hubs.
+                Visibility increased by <strong>+{primaryMetrics.visibilityAbsChange}%</strong> (reaching {primaryMetrics.currentVisibility}%), driven by rank gains in key European destination hubs.
               </p>
             </div>
             <div className="rounded-lg bg-white p-3 border border-emerald-100 shadow-2xs">
               <span className="font-semibold text-emerald-800 block">2. Average Position Improvement</span>
               <p className="mt-0.5 text-slate-600">
-                Average ranking improved from <strong>{tblMetrics.comparisonAveragePosition}</strong> to <strong>{tblMetrics.currentAveragePosition}</strong> ({tblMetrics.positionImprovement > 0 ? `+${tblMetrics.positionImprovement} positions better` : 'stable'}).
+                Average ranking improved from <strong>{primaryMetrics.comparisonAveragePosition}</strong> to <strong>{primaryMetrics.currentAveragePosition}</strong> ({primaryMetrics.positionImprovement > 0 ? `+${primaryMetrics.positionImprovement} positions better` : 'stable'}).
               </p>
             </div>
             <div className="rounded-lg bg-white p-3 border border-emerald-100 shadow-2xs">
               <span className="font-semibold text-emerald-800 block">3. Top 10 Core Expansion</span>
               <p className="mt-0.5 text-slate-600">
-                <strong>+{tblMetrics.top10AbsChange} additional keywords</strong> entered the Top 10 search results, bringing the total Top 10 footprint to {(tblMetrics.currentTop10 ?? 0).toLocaleString()}.
+                <strong>+{primaryMetrics.top10AbsChange} additional keywords</strong> entered the Top 10 search results, bringing the total Top 10 footprint to {(primaryMetrics.currentTop10 ?? 0).toLocaleString()}.
               </p>
             </div>
             <div className="rounded-lg bg-white p-3 border border-emerald-100 shadow-2xs">
@@ -384,19 +384,19 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
             <div className="rounded-lg bg-white p-3 border border-sky-100 shadow-2xs">
               <span className="font-semibold text-sky-900 block">1. Striking Distance Keywords (Positions 11–20)</span>
               <p className="mt-0.5 text-slate-600">
-                <strong>{tblMetrics.currentTop20 - tblMetrics.currentTop10} tracked keywords</strong> rank just off page one with high search intent (e.g., Vatican early access, Taj Mahal private guide).
+                <strong>{primaryMetrics.currentTop20 - primaryMetrics.currentTop10} tracked keywords</strong> rank just off page one with high search intent (e.g., Vatican early access, Taj Mahal private guide).
               </p>
             </div>
             <div className="rounded-lg bg-white p-3 border border-sky-100 shadow-2xs">
               <span className="font-semibold text-sky-900 block">2. Competitor Top 10 Gaps</span>
               <p className="mt-0.5 text-slate-600">
-                Viator and TripAdvisor rank Top 10 for 42 high-volume queries where TBL ranks &gt; 10, presenting clear target landing page expansion opportunities.
+                Viator and TripAdvisor rank Top 10 for 42 high-volume queries where PRIMARY ranks &gt; 10, presenting clear target landing page expansion opportunities.
               </p>
             </div>
             <div className="rounded-lg bg-white p-3 border border-sky-100 shadow-2xs">
               <span className="font-semibold text-sky-900 block">3. Bespoke Shore Excursion Advantage</span>
               <p className="mt-0.5 text-slate-600">
-                TBL maintains #1–#3 positions for cruise port shore excursion queries with +3.4 position advantage over GetYourGuide.
+                PRIMARY maintains #1–#3 positions for cruise port shore excursion queries with +3.4 position advantage over GetYourGuide.
               </p>
             </div>
             <div className="rounded-lg bg-white p-3 border border-sky-100 shadow-2xs">

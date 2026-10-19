@@ -54,7 +54,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
     targetSnapshot === 'current' ? 'Current Rankings Snapshot' : 'Comparison Rankings Snapshot'
   );
   const [snapshotDate, setSnapshotDate] = useState<string>('2026-08-21');
-  const [campaignName, setCampaignName] = useState<string>('toursbylocals.com – mobile (ID: 2392444)');
+  const [campaignName, setCampaignName] = useState<string>('example.com – mobile (ID: 1000000)');
   const [market, setMarket] = useState<string>('United States / Google / English / Mobile');
   const [rawCSVContent, setRawCSVContent] = useState<string>('');
   const [pastedCSV, setPastedCSV] = useState<string>('');
@@ -118,7 +118,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
     const fname = 'SEMrush_Position_Tracking_Overview_90Days_20260821.csv';
     setFileName(fname);
     setSnapshotDate('2026-08-21');
-    setCampaignName('toursbylocals.com – mobile (ID: 2392444)');
+    setCampaignName('example.com – mobile (ID: 1000000)');
     setMarket('United States / Google / English / Mobile');
 
     try {
@@ -246,7 +246,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                     <span>Your 90-Day SEMrush Position Tracking Export</span>
                   </div>
                   <p className="text-emerald-100 text-[11px]">
-                    Campaign: toursbylocals.com vs TripAdvisor, Viator, GetYourGuide (2026-05-20 to 2026-08-21)
+                    Campaign: example.com vs TripAdvisor, Viator, GetYourGuide (2026-05-20 to 2026-08-21)
                   </p>
                 </div>
                 <button
@@ -295,7 +295,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                       rows={5}
                       value={pastedCSV}
                       onChange={(e) => setPastedCSV(e.target.value)}
-                      placeholder="Paste your SEMrush CSV content starting with headers (Keyword, *.toursbylocals.com...)..."
+                      placeholder="Paste your SEMrush CSV content starting with headers (Keyword, *.example.com...)..."
                       className="w-full rounded-lg border border-slate-300 bg-white p-2.5 font-mono text-[11px] text-slate-800 focus:border-[#008768] focus:outline-none"
                     />
                     <button
@@ -366,7 +366,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                   <input
                     type="text"
                     disabled
-                    value="toursbylocals.com"
+                    value="example.com"
                     className="w-full rounded-lg border border-slate-200 bg-slate-100 p-2 text-xs font-mono text-slate-600"
                   />
                 </div>
@@ -509,7 +509,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                   <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-sans">
                     <tr>
                       <th className="p-2">Keyword</th>
-                      <th className="p-2 text-right">TBL Pos</th>
+                      <th className="p-2 text-right">PRIMARY Pos</th>
                       <th className="p-2 text-right">Prev Pos</th>
                       <th className="p-2 text-right">Volume</th>
                       <th className="p-2">Intent</th>
@@ -522,7 +522,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                     {parsedRecords.slice(0, 8).map((r) => (
                       <tr key={r.id} className="hover:bg-slate-50">
                         <td className="p-2 font-sans font-medium text-slate-900">{r.keyword}</td>
-                        <td className="p-2 text-right font-bold text-emerald-700">{r.tblPosition || '-'}</td>
+                        <td className="p-2 text-right font-bold text-emerald-700">{r.primaryPosition || '-'}</td>
                         <td className="p-2 text-right text-slate-500">{r.previousPosition || '-'}</td>
                         <td className="p-2 text-right text-slate-600">{r.searchVolume.toLocaleString()}</td>
                         <td className="p-2 font-sans">{r.intent}</td>
