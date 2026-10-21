@@ -309,7 +309,7 @@ export default function App() {
               <span className="text-slate-500">SEMrush Position Tracking Intelligence</span>
             </div>
             <div className="text-center sm:text-right text-slate-500 text-[11px]">
-              © 2026 SemanticMapper Inc. Developed by <span className="font-semibold text-slate-700">Ami - SEO Girl</span>. All rights reserved.
+              © 2026 Semrush Position Analysis. Developed by <span className="font-semibold text-slate-700"><strong>SEO Girl - Ami</strong></span>. All rights reserved.
             </div>
           </div>
         </footer>
